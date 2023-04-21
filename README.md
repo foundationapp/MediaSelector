@@ -2,7 +2,7 @@
 
 This Power-Up will allow users to select an emoji or an image from a media selector.
 
-[]
+![Media Selector Image](assets/img/media-selector.png)
 
 After you enable this power-up in your application you can render the media selector using:
 
