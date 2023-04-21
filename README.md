@@ -10,7 +10,7 @@ After you enable this power-up in your application you can render the media sele
 <livewire:powerup.media-selector />
 ```
 
-You may want to trigger the select to open when a user clicks a button. You can easily do this with the help of Alpine:
+You may want to trigger the select to open when a user clicks a button. You can easily do this, like so:
 
 ```
 <div x-data="{ open: false }"  class="relative" @click.outside="open=false" @close-project-favicon-selector.window="open=false">
@@ -38,6 +38,37 @@ You may want to add some animation to the media-selector, simple enough you can 
     </div>
 </div>
 ```
+
+# Event Callback
+
+When the value is changed inside the media selector, you can pass in an event callback, like so:
+
+```
+<livewire:powerup.media-selector eventCallback="media-selected" />
+```
+
+This will dispatch that event back to the window. This can be captured like so:
+
+```
+window.addEventListener('media-selected', function(event){
+    let value = event.detail.value; // the value of an image URL or emoji
+    let type = event.detail.typ; // can be 'emoji', 'link', or 'upload'
+});
+```
+
+You may also capture the event callback as an Alpine event, like so:
+
+```
+<div x-show="open" 
+     @media-selected.window="
+        media = event.detail.value; 
+        type = event.detail.type 
+    ">
+    <livewire:powerup.media-selector eventCallback="media-selected" />
+</div>
+```
+
+
 
 
 

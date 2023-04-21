@@ -29,7 +29,7 @@
                 this.isThisStringAValidImageURL(this.image_string, 
                     function(){
                         that.submit_processing = false;
-                        window.dispatchEvent(new CustomEvent('{{ $eventCallback }}', { detail: { 'src': that.image_string, 'type': 'link' }} ));
+                        window.dispatchEvent(new CustomEvent('{{ $eventCallback }}', { detail: { 'value': that.image_string, 'type': 'link' }} ));
                     },
                     function(){
                         window.dispatchEvent(new CustomEvent('notificationError', {
@@ -44,7 +44,7 @@
         }" 
         @image-upload-complete.window="
             image_upload_url = '{{ Storage::disk("public")->url("/") }}' + event.detail.url;
-            window.dispatchEvent(new CustomEvent('{{ $eventCallback }}', { detail: { 'src': image_upload_url, 'type' : 'upload' }} ));
+            window.dispatchEvent(new CustomEvent('{{ $eventCallback }}', { detail: { 'value': image_upload_url, 'type' : 'upload' }} ));
         "
         class="w-full h-full text-gray-800 bg-white border border-gray-200 rounded-lg shadow-xl media-selector" style="width:427px; height:{{ $height }};">
         {{-- Top Menu --}}
@@ -209,14 +209,14 @@
                         emojisRequest.onsuccess = ()=> {
                             let randomEmojiIndex = Math.floor(Math.random() * emojisRequest.result.length);
                             
-                            window.dispatchEvent(new CustomEvent('{{ $eventCallback }}', { detail: { 'src': emojisRequest.result[randomEmojiIndex].emoji, 'type' : 'emoji' }} ));
+                            window.dispatchEvent(new CustomEvent('{{ $eventCallback }}', { detail: { 'value': emojisRequest.result[randomEmojiIndex].emoji, 'type' : 'emoji' }} ));
                         }
                     }
 
                     // The picker emits an event when an emoji is selected. Do with it as you will!
                     picker.addEventListener('emoji:select', event => {
                     
-                        window.dispatchEvent(new CustomEvent('{{ $eventCallback }}', { detail: { 'src': event.emoji, 'type' : 'emoji' }} ));
+                        window.dispatchEvent(new CustomEvent('{{ $eventCallback }}', { detail: { 'value': event.emoji, 'type' : 'emoji' }} ));
                     
                     });
 
